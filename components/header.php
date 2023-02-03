@@ -16,7 +16,17 @@
             <li><a href="index.php?page=catalog">Каталог</a></li>
             <li><a href="delivery.html">Доставка</a></li>
             <li><a href="contacts.html">Контакты</a></li>
-            <li><a href="blog.html">Блог</a></li>
+<!--            <li><a href="blog.html">Блог</a></li>-->
+            <?php
+            if ($_SESSION['login']) {
+//                echo ('<li><a href="product_add.php">Добавить продукт</a></li>');
+                echo ('<li>'.$_SESSION['login'].'<a href="index.php?logout=1">Выйти</a></li>');
+//                echo ('<li><a href="order.php">Заказ</a></li>');
+            }
+            else {
+                echo (' <li><a href="index.php?page=login">Войти</a></li>');
+            }
+            ?>
         </ul>
     </nav>
 </header>

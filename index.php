@@ -1,6 +1,7 @@
 <?php
-require('dbconnect.php');
-require('components/header.php');
+require ('dbconnect.php');
+require ('auth.php');
+require ('components/header.php');
 
 switch ($_GET['page']){
     case "catalog":{
@@ -12,10 +13,16 @@ switch ($_GET['page']){
         require "components/product_info.php";
         break;
     }
+    case "login":{
+        require "components/login_form.php";
+        break;
+    }
 
     default:{
         require('components/company_info.php');
     }
 }
+require('components/message.php');
 require('components/footer.php');
+
 ?>

@@ -574,3 +574,11 @@ span.price:empty::after,
 .social-list a:active {
     opacity: 0.3;
 }
+
+.message {
+    display: block;
+    margin: 0;
+    padding: 14px 15px;
+    font-size: 19px;
+    color: #ff0000;
+}
