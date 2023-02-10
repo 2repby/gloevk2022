@@ -30,6 +30,7 @@
                 }
             }
             else $msg = "Неправильное имя пользователя!";
+            header('Location: /index.php?page=login');
         }
 
     }
@@ -38,7 +39,7 @@
     {
         $_SESSION = null;
         $_SESSION['msg'] =  "Вы успешно вышли из системы";
-        header('Location: /');
+        header('Location: /index.php?page=login');
         exit( );
     }
 
