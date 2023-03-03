@@ -11,6 +11,7 @@
                 $_SESSION['msg'] = null;
             }
             ?>
+            <?=$_SESSION['is_admin'] ?>
         </p>
 
 </div>

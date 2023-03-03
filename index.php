@@ -17,6 +17,10 @@ switch ($_GET['page']){
         require "components/login_form.php";
         break;
     }
+    case "productform":{
+        require "components/product_form.php";
+        break;
+    }
 
     default:{
         require('components/company_info.php');

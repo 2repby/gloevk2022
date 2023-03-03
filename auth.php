@@ -5,7 +5,7 @@
     if (isset($_POST["login"]) and $_POST["login"]!='')
     {
         try {
-            $sql = 'SELECT id, name, password FROM users WHERE email=(:login)';
+            $sql = 'SELECT id, name, password, is_admin FROM users WHERE email=(:login)';
             $stmt = $conn->prepare($sql);
             $stmt->bindValue(':login', $_POST['login']);
             $stmt->execute();
@@ -22,9 +22,11 @@
                 if (MD5($_POST["password"]) != $row['password']) $msg = "Неправильный пароль!";
                 else {
                     // успешная аутентификация
+//                    var_dump($row);
                     $_SESSION['login'] = $_POST["login"];
                     $_SESSION['name'] = $row['name'];
                     $_SESSION['id'] = $row['id'];
+                    $_SESSION['is_admin'] = $row['is_admin'];
                     $_SESSION['msg'] = "Вы успешно вошли в систему";
                     header('Location: /index.php?page=catalog');
                     exit( );
