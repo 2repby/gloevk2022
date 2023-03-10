@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    session_start(["use_strict_mode" => true]);
 
 
     if (isset($_POST["login"]) and $_POST["login"]!='')
@@ -14,12 +14,19 @@
             // $id = $pdo->lastInsertId('id');
 
         } catch (PDOexception $error) {
-            $msg = "Ошибка аутентификации: " . $error->getMessage();
+            $_SESSION['msg'] = "Ошибка аутентификации: " . $error->getMessage();
+            header('Location: /index.php?page=login');
+            exit( );
         }
         // если удалось получить строку с паролем из БД
-        if (is_null($msg)) {
+
             if ($row = $stmt->fetch(PDO::FETCH_LAZY)) {
-                if (MD5($_POST["password"]) != $row['password']) $msg = "Неправильный пароль!";
+                if (MD5($_POST["password"]) != $row['password'])
+                {
+                    $_SESSION['msg'] =  "Неправильный пароль!";
+                    header('Location: /index.php?page=login');
+                    exit( );
+                }
                 else {
                     // успешная аутентификация
 //                    var_dump($row);
@@ -32,14 +39,19 @@
                     exit( );
                 }
             }
-            else $msg = "Неправильное имя пользователя!";
-            header('Location: /index.php?page=login');
-        }
+            else  {
+                $_SESSION['msg'] = "Неправильное имя пользователя!";
+                header('Location: /index.php?page=login');
+                exit( );
+            }
+
+
 
     }
 
     if (isset($_GET["logout"]))
     {
+        session_unset();
         $_SESSION = null;
         $_SESSION['msg'] =  "Вы успешно вышли из системы";
         header('Location: /index.php?page=login');
